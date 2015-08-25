@@ -8,6 +8,7 @@ public class Instance
 	char map[][] = new char[128][128];
 	char mapmiddle[][] = new char[128][128];
 	char maptop[][] = new char[128][128];
+	char mapnpc[][] = new char[128][128];
 	int roomlength = 32;
 	int roomwidth = 32;
 	
@@ -22,6 +23,8 @@ public class Instance
 					map[i][m] = callLoadMap.testmap.charAt(i*32+m);
 					mapmiddle[i][m] = callLoadMap.testmapm.charAt(i*32+m);
 					maptop[i][m] = callLoadMap.testmapt.charAt(i*32+m);
+					
+					mapnpc[i][m] = callLoadMap.testmapNPC.charAt(i*32+m);
 				}
 			}
 		}

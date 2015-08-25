@@ -211,6 +211,8 @@ public class SmallfolkGame extends BasicGame
     	middle[89] = new Image("data/tiles/wall8.png");         //UNICODE Y = Wall 8
     	middle[90] = new Image("data/tiles/wall9.png");         //UNICODE Z = Wall 9
     	
+    	top[49] = new Image("data/")
+    	
     	callMenu.UpdateMenu();
     	
     }
@@ -322,6 +324,9 @@ public class SmallfolkGame extends BasicGame
     				v = (int) tile;
     				top[v].draw(a*32-camx,b*32-camy);
     		
+    				tile = callInstance.mapnpc[b][a];
+    				v = (int) tile;
+    				npc[v].draw(a*32-camx,b*32-camy);
     			}
     		}
     		hero.draw(480-24,320-32, 1.0f);
