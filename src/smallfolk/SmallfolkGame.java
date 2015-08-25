@@ -24,6 +24,7 @@ public class SmallfolkGame extends BasicGame
 	Image tiles[] = new Image[128];
 	Image middle[] = new Image[128];
 	Image top[] = new Image[128];
+	Image npc[] = new Image[128];
 	
     public SmallfolkGame()
     {
@@ -173,6 +174,7 @@ public class SmallfolkGame extends BasicGame
     		tiles[a] = new Image("data/tiles/dark.png");
     		middle[a] = new Image("data/tiles/blank.png");
     		top[a] = new Image("data/tiles/blank.png");
+    		npc[a] = new Image("data/tiles/blank.png");
     	}
     	tiles[49] = new Image("data/tiles/grass.png");       //UNICODE 1 = GRASS
     	
@@ -211,7 +213,7 @@ public class SmallfolkGame extends BasicGame
     	middle[89] = new Image("data/tiles/wall8.png");         //UNICODE Y = Wall 8
     	middle[90] = new Image("data/tiles/wall9.png");         //UNICODE Z = Wall 9
     	
-    	top[49] = new Image("data/")
+    	npc[49] = new Image("data/npc/dank.png");
     	
     	callMenu.UpdateMenu();
     	

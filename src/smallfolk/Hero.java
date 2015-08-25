@@ -80,7 +80,8 @@ public class Hero {
 			callInstance.mapmiddle[HERO_Y][HERO_X] == 'S' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'T' ||
 			callInstance.mapmiddle[HERO_Y][HERO_X] == 'U' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'V' ||
 			callInstance.mapmiddle[HERO_Y][HERO_X] == 'W' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'X' ||
-			callInstance.mapmiddle[HERO_Y][HERO_X] == 'Y' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'Z')
+			callInstance.mapmiddle[HERO_Y][HERO_X] == 'Y' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'Z' ||
+			callInstance.mapnpc[HERO_Y][HERO_X]    == '1' || callInstance.mapnpc[HERO_Y][HERO_X]    == '2' ) 
 		{
 			useenergy = false;
 			return false;
