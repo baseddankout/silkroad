@@ -12,15 +12,16 @@ public class SmallfolkGame extends BasicGame
 	Hero callHero = new Hero(callInstance);
 	Button callButton = new Button();
 	Menu callMenu = new Menu();
+	Npc callNpc = new Npc(callHero, callInstance);
 	int globalticks = 0;
 	static int height = 600;
 	static int width = 900;
 	static boolean fullscreen = false;
 	static boolean showFPS = true;
-	static String title = "Stereotype Smash";
+	static String title = "Smallfolk";
 	static int fpslimit = 60;
 	
-	Image uia, uid, uiw, uis, uiq, uispace, uileftshift, textleftshift, textspace, uie, texte, energybar, hero, menuplate;
+	Image uia, uid, uiw, uis, uiq, uispace, uileftshift, textleftshift, textspace, uie, texte, energybar, hero, menuplate, text;
 	Image tiles[] = new Image[128];
 	Image middle[] = new Image[128];
 	Image top[] = new Image[128];
@@ -137,6 +138,10 @@ public class SmallfolkGame extends BasicGame
     	if (input.isKeyDown(Input.KEY_E))
     	{
     		callButton.epressed = true;
+    		if (input.isKeyPressed(Input.KEY_E))
+    		{
+    			callNpc.toggleText();
+    		}
     	}
     	else
     		callButton.epressed = false;
@@ -168,6 +173,7 @@ public class SmallfolkGame extends BasicGame
     	energybar = new Image("data/ui/energy/full.png");
     	hero = new Image("data/sprites/hero/downi.png");
     	menuplate = new Image("data/ui/menu/menu.png");
+    	text = new Image("data/text/navyseal.png");
     	
     	for (int a = 0; a < 128; a++)
     	{
@@ -236,6 +242,8 @@ public class SmallfolkGame extends BasicGame
     	//Update 
     	callInstance.LoadMap();
     	callButton.UpdateOverlay();
+    	callNpc.callText();
+    	
     	
     		//Buttons
     	if (uia.equals(callButton.a))	{} else {
@@ -359,6 +367,10 @@ public class SmallfolkGame extends BasicGame
     				}
     			}
     		}
+        	if (callNpc.talking == true)
+        	{
+        		text.draw(400,300);
+        	}
     	}
     }
 }
