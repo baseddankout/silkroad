@@ -135,13 +135,10 @@ public class SmallfolkGame extends BasicGame
     		callButton.spacepressed = false;
     	
 
-    	if (input.isKeyDown(Input.KEY_E))
+    	if (input.isKeyPressed(Input.KEY_E))
     	{
     		callButton.epressed = true;
-    		if (input.isKeyPressed(Input.KEY_E))
-    		{
-    			callNpc.toggleText();
-    		}
+    		callNpc.toggleText();
     	}
     	else
     		callButton.epressed = false;
@@ -369,7 +366,7 @@ public class SmallfolkGame extends BasicGame
     		}
         	if (callNpc.talking == true)
         	{
-        		text.draw(400,300);
+        		text.draw(420,440);
         	}
     	}
     }

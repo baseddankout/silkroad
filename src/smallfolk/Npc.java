@@ -5,6 +5,7 @@ public class Npc {
 	Hero callHero = new Hero(callInstance);
 	String textid = ("data/text/navyseal.png");
 	boolean talk = false;
+	boolean inRange = true;
 	boolean talking = false;
 	Npc (Hero theHero, Instance theInstance){
 		callHero = theHero;
@@ -28,8 +29,8 @@ public class Npc {
 			renderText(1);
 		}
 		else{
-			talk = false;
 			talking = false;
+			inRange = false;
 		}
 			
 	}
@@ -38,15 +39,20 @@ public class Npc {
 		{
 			textid = ("data/text/navyseal.png");
 		}
-		talk = true;
-		talking = true;
+		inRange = true;
 	}
 	
 	public void toggleText()	{
-		if (talking = false)
+		if (inRange == true && talk == false)	
+		{
 			talking = true;
-		else
+			talk = true;
+		}
+		else if (talk == true)
+		{
 			talking = false;
+			talk = false;
+		}
 	}
 }
 
