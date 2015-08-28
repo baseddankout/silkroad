@@ -18,10 +18,28 @@ public class Hero {
 	boolean useenergy = false;
 	int oldhx, oldhy = 0;
 	
+	String crew[] = new String[4];
+	String inventory[] = new String[128];
+
+	
+	
 	Hero (Instance theInstance){
 		callInstance = theInstance;
 	}
 	String energyid = ("data/ui/energy/full.png");
+	
+	
+	public void SetValues()
+	{
+		crew[0] = ("Shlomo");
+		crew[1] = ("None");
+		crew[2] = ("None");
+		crew[3] = ("None");
+		
+		for (int j = 0; j < 128; j++)
+			inventory[j] = ("None");
+			
+	}
 	
 	public void WalkLeft()
 	{

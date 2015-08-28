@@ -12,21 +12,13 @@ public class Npc {
 		callInstance = theInstance;
 	}
 	public void callText()	{
-		if (callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X+1] == '1')
+		if (callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X] == '3' || callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X] == '1')
 		{
 			renderText(1);
 		}
-		else if (callInstance.mapnpc[callHero.HERO_Y+1][callHero.HERO_X] == '1')
+		else if (callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X] == '2' || callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X] == '4')
 		{
-			renderText(1);
-		}
-		else if (callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X] == '1')
-		{
-			renderText(1);
-		}
-		else if (callInstance.mapnpc[callHero.HERO_Y][callHero.HERO_X] == '1')
-		{	
-			renderText(1);
+			renderText(2);
 		}
 		else{
 			talking = false;
@@ -38,6 +30,10 @@ public class Npc {
 		if (i == 1)
 		{
 			textid = ("data/text/navyseal.png");
+		}
+		if (i == 2)
+		{
+			textid = ("data/text/merchant.png");
 		}
 		inRange = true;
 	}

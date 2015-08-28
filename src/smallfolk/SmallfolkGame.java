@@ -21,7 +21,8 @@ public class SmallfolkGame extends BasicGame
 	static String title = "Smallfolk";
 	static int fpslimit = 60;
 	
-	Image uia, uid, uiw, uis, uiq, uispace, uileftshift, textleftshift, textspace, uie, texte, energybar, hero, menuplate, text;
+	Image uia, uid, uiw, uis, uiq, uispace, uileftshift, textleftshift, textspace, uie, texte, energybar, hero, menuplate, text, menuselect, crewbg;
+	Image ricon[] = new Image[4];
 	Image tiles[] = new Image[128];
 	Image middle[] = new Image[128];
 	Image top[] = new Image[128];
@@ -53,11 +54,13 @@ public class SmallfolkGame extends BasicGame
     public void menuInput(GameContainer container, Input input, int delta) throws SlickException{
     	if (input.isKeyPressed(Input.KEY_W))
     	{
-    		
+    		callMenu.SelectUp();
+    		callMenu.UpdatePosition();
     	}
     	if (input.isKeyPressed(Input.KEY_S))
     	{
-    		
+    		callMenu.SelectDown();
+    		callMenu.UpdatePosition();
     	}
     	if (input.isKeyPressed(Input.KEY_A))
     	{
@@ -69,7 +72,8 @@ public class SmallfolkGame extends BasicGame
     	}
     	if (input.isKeyPressed(Input.KEY_SPACE))
     	{
-    		callMenu.UseMenu();
+    		if (callMenu.position == 3)
+    			callMenu.UseMenu();
     	}
     	if (input.isKeyPressed(Input.KEY_E))
     	{
@@ -169,8 +173,12 @@ public class SmallfolkGame extends BasicGame
     	
     	energybar = new Image("data/ui/energy/full.png");
     	hero = new Image("data/sprites/hero/downi.png");
-    	menuplate = new Image("data/ui/menu/menu.png");
+    	menuplate = new Image("data/ui/menu/loadout.png");
     	text = new Image("data/text/navyseal.png");
+    	menuselect = new Image("data/ui/menu/loadoutselect.png");
+    	crewbg = new Image("data/ui/menu/crewbg.png");
+    	ricon[0] = new Image("data/ui/menu/hebrewicon.png");
+    	
     	
     	for (int a = 0; a < 128; a++)
     	{
@@ -216,8 +224,10 @@ public class SmallfolkGame extends BasicGame
     	middle[89] = new Image("data/tiles/wall8.png");         //UNICODE Y = Wall 8
     	middle[90] = new Image("data/tiles/wall9.png");         //UNICODE Z = Wall 9
     	
-    	npc[49] = new Image("data/npc/dank.png");
+    	npc[49] = new Image("data/npc/dank.png"); //1
+    	npc[50] = new Image("data/npc/ron.png"); //2
     	
+    	callHero.SetValues();
     	callMenu.UpdateMenu();
     	
     }
@@ -269,6 +279,9 @@ public class SmallfolkGame extends BasicGame
     	}
     	if (texte.equals(callButton.overlaye))	{} else {
     		texte = new Image (callButton.overlaye);
+    	}
+    	if (text.equals(callNpc.textid))	{} else{
+    		text = new Image (callNpc.textid);
     	}
     	//Reset Values
     	
@@ -356,12 +369,18 @@ public class SmallfolkGame extends BasicGame
     		{
     			if (callMenu.type == ("In Game"))
     			{
-    				menuplate.draw(600,80, 1.5f);
-    				for (int x = 0; x < 6; x++)
+    				menuplate.draw(0,0);
+    				menuselect.draw(callMenu.sposx, callMenu.sposy);
+    				for (int h = 0; h < 4; h++)
     				{
-    					g.drawString(callMenu.list[x], callMenu.listx[x], 110+(32*x));
-    					//textspace.draw( callMenu.listx[x], 100+(32*x));
+        				if (callHero.crew[h] == ("Shlomo"))
+        				{
+        					crewbg.draw(25,150+(143*h));
+        					ricon[0].draw(458,193+(143*h));
+        					g.drawString("Shlomo",86,160);
+        				}
     				}
+
     			}
     		}
         	if (callNpc.talking == true)
