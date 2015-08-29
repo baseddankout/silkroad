@@ -13,6 +13,7 @@ public class SmallfolkGame extends BasicGame
 	Button callButton = new Button();
 	Menu callMenu = new Menu();
 	Npc callNpc = new Npc(callHero, callInstance);
+	Particle callParticle = new Particle();
 	int globalticks = 0;
 	static int height = 600;
 	static int width = 900;
@@ -21,12 +22,13 @@ public class SmallfolkGame extends BasicGame
 	static String title = "Smallfolk";
 	static int fpslimit = 60;
 	
-	Image uia, uid, uiw, uis, uiq, uispace, uileftshift, textleftshift, textspace, uie, texte, energybar, hero, menuplate, text, menuselect, crewbg;
+	Image uia, uid, uiw, uis, uiq, uispace, uileftshift, textleftshift, textspace, uie, texte, energybar, hero, menuplate, text, menuselect, crewbg, loadscreen, itemui, itemar, itemal, itemselect;
 	Image ricon[] = new Image[4];
 	Image tiles[] = new Image[128];
 	Image middle[] = new Image[128];
 	Image top[] = new Image[128];
 	Image npc[] = new Image[128];
+	Image grass[] = new Image[64];
 	
     public SmallfolkGame()
     {
@@ -64,16 +66,35 @@ public class SmallfolkGame extends BasicGame
     	}
     	if (input.isKeyPressed(Input.KEY_A))
     	{
-    		
+    		callMenu.SelectLeft();
+    		callMenu.UpdatePosition();
     	}
     	if(input.isKeyPressed(Input.KEY_D))
     	{
-    		
+    		callMenu.SelectRight();
+    		callMenu.UpdatePosition();
     	}
     	if (input.isKeyPressed(Input.KEY_SPACE))
     	{
-    		if (callMenu.position == 3)
-    			callMenu.UseMenu();
+    		if (callMenu.type == ("In Game"))	{
+    			if (callMenu.position == 3)
+        			callMenu.UseMenu();
+        		if (callMenu.position == 1)
+        		{
+        			callMenu.UpdateMenu("Item");
+    				callMenu.position = 1;
+    				callMenu.UpdatePosition();
+        		}
+    		}
+    		else if (callMenu.type == ("Item"))
+    		{
+    			if (callMenu.position == 2)
+    			{
+    				callMenu.UpdateMenu("In Game");
+    				callMenu.position = 1;
+    				callMenu.UpdatePosition();
+    			}
+    		}
     	}
     	if (input.isKeyPressed(Input.KEY_E))
     	{
@@ -128,7 +149,8 @@ public class SmallfolkGame extends BasicGame
     	if (input.isKeyPressed(Input.KEY_SPACE))
     	{
     		callButton.spacepressed = true;
-    		callMenu.UpdateMenu();
+    		String Giveme = ("In Game");
+    		callMenu.UpdateMenu(Giveme);
     		callMenu.UseMenu();
     	}
     	else if (input.isKeyDown(Input.KEY_SPACE))
@@ -159,6 +181,7 @@ public class SmallfolkGame extends BasicGame
     @Override
     public void init(GameContainer container) throws SlickException
     {	
+    	loadscreen = new Image("data/ui/title/title.png");
     	uia = new Image(callButton.a);
     	uid = new Image(callButton.d);
     	uiw = new Image(callButton.w);
@@ -170,6 +193,10 @@ public class SmallfolkGame extends BasicGame
     	textspace = new Image(callButton.overlayspace);
     	uie = new Image(callButton.e);
     	texte = new Image(callButton.overlaye);
+    	itemui = new Image("data/ui/menu/itemui.png");
+    	itemselect = new Image("data/ui/menu/itemselect.png");
+    	itemal = new Image("data/ui/menu/larrown.png");
+    	itemar = new Image("data/ui/menu/rarrown.png");
     	
     	energybar = new Image("data/ui/energy/full.png");
     	hero = new Image("data/sprites/hero/downi.png");
@@ -188,6 +215,7 @@ public class SmallfolkGame extends BasicGame
     		npc[a] = new Image("data/tiles/blank.png");
     	}
     	tiles[49] = new Image("data/tiles/grass.png");       //UNICODE 1 = GRASS
+    	tiles[50] = new Image("data/tiles/grass.png");       //UNICODE 2 = TALL GRASS
     	
     	
     	middle[49] = new Image("data/tiles/pebbles.png");    //UNICODE 1 = PEBBLES
@@ -228,7 +256,13 @@ public class SmallfolkGame extends BasicGame
     	npc[50] = new Image("data/npc/ron.png"); //2
     	
     	callHero.SetValues();
-    	callMenu.UpdateMenu();
+    	String Giveme = ("In Game");
+    	callMenu.UpdateMenu(Giveme);
+    	callParticle.SetGrass();
+    	for (int i = 0; i < 64; i++)
+    	{
+    		grass[i] = new Image("data/particle/grass.png");
+    	}
     	
     }
  
@@ -321,9 +355,19 @@ public class SmallfolkGame extends BasicGame
     		globalticks++;
     	}
     }
+    
+
  
     public void render(GameContainer container, Graphics g) throws SlickException
     {
+    	if (callInstance.startuptime > 0)
+    	{
+    		callInstance.startuptime--;
+    		callInstance.alpha--;
+    		loadscreen.draw(0,0);
+    		loadscreen.setAlpha(callInstance.alpha/100);
+    	}
+    	else	{
     	int camx = callHero.hx-480;
     	int camy = callHero.hy-320;
     	if (callInstance.location == ("Start"))	
@@ -352,6 +396,23 @@ public class SmallfolkGame extends BasicGame
     		hero.draw(480-24,320-32, 1.0f);
     		energybar.draw(760,530);
     		
+    		for (int a = 0; a < 32; a++)
+    		{
+    			for (int b = 0; b < 32; b++)
+    			{
+    				if (callInstance.map[b][a] == ('2'))
+    				{
+    					for (int i = 0; i < 4; i++)
+    					{    	
+    						for (int r = 0; r < 4; r++)
+    						{
+    							grass[a].draw(a*32-camx+(callParticle.grassx[a][b]+i*4), b*32-camy+(callParticle.grassy[a][b]+r*4));
+    						}
+    						
+    					}
+    				}
+    			}	
+    		}
     		uis.draw(150,560);
     		uiw.draw(100,515);
     		uia.draw(80,560);
@@ -382,11 +443,28 @@ public class SmallfolkGame extends BasicGame
     				}
 
     			}
+    			else if (callMenu.type == ("Item"))
+    			{
+    				itemui.draw(0,0);
+    				itemal.draw(0,0);
+    				itemar.draw(0,0);
+    				itemselect.draw(callMenu.sposx, callMenu.sposy);
+    				if (callMenu.spot > 0)
+    				{
+        				if (callHero.inventory[callMenu.spot] == ("None"))
+        				{
+        					g.drawString("Nothing: There is absolutely nothing in this spot. What are you even looking at?",50,530);
+        				}
+    				}
+
+    			}
     		}
         	if (callNpc.talking == true)
         	{
         		text.draw(420,440);
         	}
     	}
+    	
+    	}//loadscreen shitter
     }
 }

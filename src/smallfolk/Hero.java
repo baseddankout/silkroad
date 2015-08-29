@@ -5,7 +5,7 @@ package smallfolk;
 
 public class Hero {
 	Instance callInstance = new Instance();
-	int hy, hx = 400;
+	int hy = 300, hx = 600;
 	double modifier = 1;
 	int energy = 2000;
 	int MAX_ENERGY = 2000;
@@ -20,6 +20,7 @@ public class Hero {
 	
 	String crew[] = new String[4];
 	String inventory[] = new String[128];
+	int itemcount = 0;
 
 	
 	

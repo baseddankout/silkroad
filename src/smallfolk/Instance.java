@@ -4,6 +4,9 @@ public class Instance
 {
 	LoadMap callLoadMap = new LoadMap();
 	
+	int startuptime = 100;
+	float alpha = 100;
+	
 	String location = ("Start");
 	char map[][] = new char[128][128];
 	char mapmiddle[][] = new char[128][128];
@@ -11,6 +14,7 @@ public class Instance
 	char mapnpc[][] = new char[128][128];
 	int roomlength = 32;
 	int roomwidth = 32;
+	
 	
 	public void LoadMap()
 	{
