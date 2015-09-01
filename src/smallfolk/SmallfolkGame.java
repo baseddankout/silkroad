@@ -252,9 +252,47 @@ public class SmallfolkGame extends BasicGame
     	middle[89] = new Image("data/tiles/wall8.png");         //UNICODE Y = Wall 8
     	middle[90] = new Image("data/tiles/wall9.png");         //UNICODE Z = Wall 9
     	
+    	top[97] = new Image("data/tiles/roof1.png");            // a = Roof 1
+    	top[98] = new Image("data/tiles/roof2.png");            // b = Roof 2
+    	top[99] = new Image("data/tiles/roof3.png");            // c = Roof 3
+    	top[100] = new Image("data/tiles/roof4.png");            // d = Roof 4
+    	top[101] = new Image("data/tiles/roof5.png");            // e = Roof 5
+    	top[102] = new Image("data/tiles/roof6.png");            // f = Roof 6
+    	top[103] = new Image("data/tiles/roof7.png");            // g = Roof 7
+    	top[104] = new Image("data/tiles/roof8.png");            // h = Roof 8
+    	top[105] = new Image("data/tiles/roof9.png");            // i = Roof 9
+    	top[106] = new Image("data/tiles/roof10.png");            // j = Roof 10
+    	top[107] = new Image("data/tiles/roof11.png");            // k = Roof 11
+    	top[108] = new Image("data/tiles/roof12.png");            // l = Roof 12
+    	top[109] = new Image("data/tiles/roof13.png");            // m = Roof 13
+    	top[110] = new Image("data/tiles/roof14.png");            // n = Roof 14
+    	top[111] = new Image("data/tiles/roof15.png");            // o = Roof 15
+    	top[112] = new Image("data/tiles/roof16.png");            // p = Roof 16
+    	top[113] = new Image("data/tiles/roof17.png");            // q = Roof 17
+    	top[114] = new Image("data/tiles/roof18.png");            // r = Roof 18
+    	top[115] = new Image("data/tiles/roof19.png");            // s = Roof 19
+    	top[116] = new Image("data/tiles/roof20.png");            // t = Roof 20
+    	top[117] = new Image("data/tiles/roof21.png");            // u = Roof 21
+    	top[118] = new Image("data/tiles/roof22.png");            // v = Roof 22
+    	top[119] = new Image("data/tiles/roof23.png");            // w = Roof 23
+    	top[120] = new Image("data/tiles/roof24.png");            // x = Roof 24
+    	top[121] = new Image("data/tiles/roof25.png");            // y = Roof 25
+    	top[122] = new Image("data/tiles/roof26.png");            // z = Roof 26
+    	top[123] = new Image("data/tiles/roof27.png");            // { = Roof 27
+    	
+    	
     	npc[49] = new Image("data/npc/dank.png"); //1
     	npc[50] = new Image("data/npc/ron.png"); //2
     	
+    	
+    	/*ohhh god the roof    its like
+    	 *        1 2 3
+    	 *      4 5 6 7 8
+    	 *    9 10 11 12 13
+    	 *   14 15 16 17 18  
+    	 *   19 20 21 22 23
+    	 *   24 25    26 27
+    	*/
     	callHero.SetValues();
     	String Giveme = ("In Game");
     	callMenu.UpdateMenu(Giveme);
@@ -324,6 +362,15 @@ public class SmallfolkGame extends BasicGame
     	if (callHero.energy != callHero.MAX_ENERGY)
     		energybar = new Image(callHero.energyid);
     	
+    	if (callMenu.type == ("Item"))
+    	{
+    		if (callMenu.position <= 3)
+    		{
+    	    	itemselect = new Image("data/ui/menu/topitem.png");
+    		}
+    		else
+    			itemselect = new Image("data/ui/menu/itemselect.png");
+    	}
     	
     	//Animato!
     	if (globalticks == 40)
@@ -384,9 +431,6 @@ public class SmallfolkGame extends BasicGame
     				v = (int) tile;
     				middle[v].draw(a*32-camx,b*32-camy);
     				
-    				tile = callInstance.maptop[b][a];
-    				v = (int) tile;
-    				top[v].draw(a*32-camx,b*32-camy);
     		
     				tile = callInstance.mapnpc[b][a];
     				v = (int) tile;
@@ -394,6 +438,20 @@ public class SmallfolkGame extends BasicGame
     			}
     		}
     		hero.draw(480-24,320-32, 1.0f);
+    		
+    		//Draw above hero
+    		for (int a = 0; a < 32; a++)
+    		{
+    			for (int b = 0; b < 32; b++)
+    			{
+    				char tile = callInstance.map[b][a];
+    				int v = (int) tile;
+    				tile = callInstance.maptop[b][a];
+    				v = (int) tile;
+    				top[v].draw(a*32-camx,b*32-camy);
+    			}
+    		}
+    		
     		energybar.draw(760,530);
     		
     		for (int a = 0; a < 32; a++)

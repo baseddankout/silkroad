@@ -5,7 +5,7 @@ public class Menu {
 	int listx[] = new int[64];
 	int listy[] = new int[64];
 	String type = ("In Game");
-	boolean isopen = false;
+	boolean isopen = false, ontop = true;
 	int spot = 0, page = 0, sposx = 0, sposy = 0, position = 0;
 	
 
@@ -33,14 +33,14 @@ public void UpdateMenu(String Giveme)
 	}
 	if (type == ("Item"))
 	{
-		listx[0] = 15;
-		listy[0] = 0;
+		listx[0] = 16;
+		listy[0] = -2;
 		listx[1] = 240;
-		listy[1] = 0;
-		listx[2] = 460;
-		listy[2] = 0;
-		listx[3] = 720;
-		listy[3] = 0;
+		listy[1] = -2;
+		listx[2] = 466;
+		listy[2] = -2;
+		listx[3] = 715;
+		listy[3] = -2;
 		listx[4] = 12;
 		listy[4] = 113;
 		listx[5] = 233;

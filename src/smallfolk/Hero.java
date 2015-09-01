@@ -100,7 +100,12 @@ public class Hero {
 			callInstance.mapmiddle[HERO_Y][HERO_X] == 'U' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'V' ||
 			callInstance.mapmiddle[HERO_Y][HERO_X] == 'W' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'X' ||
 			callInstance.mapmiddle[HERO_Y][HERO_X] == 'Y' || callInstance.mapmiddle[HERO_Y][HERO_X] == 'Z' ||
-			callInstance.mapnpc[HERO_Y][HERO_X]    == '1' || callInstance.mapnpc[HERO_Y][HERO_X]    == '2' ) 
+			callInstance.mapnpc[HERO_Y][HERO_X]    == '1' || callInstance.mapnpc[HERO_Y][HERO_X]    == '2' ||
+			callInstance.maptop[HERO_Y][HERO_X]    == 'i' || callInstance.maptop[HERO_Y][HERO_X]    == 'j' ||
+			callInstance.maptop[HERO_Y][HERO_X]    == 'k' || callInstance.maptop[HERO_Y][HERO_X]    == 'l' ||
+			callInstance.maptop[HERO_Y][HERO_X]    == 'm' || callInstance.maptop[HERO_Y][HERO_X]    == 'n' ||
+			callInstance.maptop[HERO_Y][HERO_X]    == 'o' || callInstance.maptop[HERO_Y][HERO_X]    == 'p' ||
+			callInstance.maptop[HERO_Y][HERO_X]    == 'q' || callInstance.maptop[HERO_Y][HERO_X]    == 'r') 
 		{
 			useenergy = false;
 			return false;
